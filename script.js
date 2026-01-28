@@ -4,7 +4,13 @@ const times = document.querySelector('#times')
 let clickTime = 0
 let timesClicked = 0
 
+// Prevenir comportamiento por defecto en móviles
+loveMe.addEventListener('touchstart', (e) => {
+    e.preventDefault()
+})
+
 loveMe.addEventListener('click', (e) => {
+    e.preventDefault()
     if(clickTime === 0) {
         clickTime = new Date().getTime()
     } else {
@@ -22,8 +28,8 @@ const createHeart = (e) => {
     heart.classList.add('fas')
     heart.classList.add('fa-heart')
 
-    const x = e.clientX
-    const y = e.clientY
+    const x = e.clientX || (e.touches && e.touches[0].clientX)
+    const y = e.clientY || (e.touches && e.touches[0].clientY)
 
     const leftOffset = e.target.offsetLeft
     const topOffset = e.target.offsetTop
